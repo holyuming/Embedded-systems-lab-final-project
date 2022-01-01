@@ -1,5 +1,4 @@
 certifi==2021.10.8
-numpy @ file:///home/conda/feedstock_root/build_artifacts/numpy_1626648378336/work
 opencv-contrib-python==4.5.4.60
 PyQt5==5.15.6
 PyQt5-Qt5==5.15.2

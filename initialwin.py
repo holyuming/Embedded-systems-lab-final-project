@@ -10,7 +10,7 @@ from PyQt5.QtWidgets import (QApplication, QMainWindow, QWidget, QLabel, QTextEd
 
 stylesheet = """
     QWidget {
-        background-color: gray;
+        background-color: black;
         background-position: center;
     }
     QPushButton {
@@ -48,7 +48,7 @@ class Window(QWidget):
         """
         Initialize the window and display its contents to the screen
         """
-        self.setGeometry(250, 50, 1920, 1080)
+        self.setGeometry(560, 230, 800, 620)
         self.setWindowTitle('NCTU FOOD GUIDE SYSTEM')
         self.setWindowIcon(QIcon("image/nctu.jpeg"))
         self.setStyleSheet(stylesheet)                                      # <========
@@ -58,14 +58,10 @@ class Window(QWidget):
     def setupUI(self):
 
         
-        self.title = QLabel("NCTU FOOD GUIDE SYSTEM")
-        self.title.setFont(QFont('Arial', 100))
-        self.title.setStyleSheet("font: bold")
+        self.title = QLabel("NCTU FOOD GUIDE \n SYSTEM")
+        self.title.setFont(QFont('ubuntu', 90))
+        self.title.setStyleSheet("font: bold ; color:white")
         self.title.setAlignment(Qt.AlignCenter)
-
-        self.enter_button = QPushButton("Enter")
-        self.enter_button.resize(300, 500) 
-        self.enter_button.clicked.connect(self.enter1)
 
         # Create NCTU logo 
         self.nctuimage = "image/nctu.jpeg"
@@ -81,12 +77,10 @@ class Window(QWidget):
 
         # Create checkboxes and line edit widgets
         functionoption = QHBoxLayout()
-        self.mapbox = QCheckBox("map")
-        self.mapbox.setFont(QFont('Arial', 50))
-        self.tourbox = QCheckBox("tour")
-        self.tourbox.setFont(QFont('Arial', 50))
-        self.mapbox.setStyleSheet("QCheckBox::indicator { width: 80px; height: 80px;}")
-        self.tourbox.setStyleSheet("QCheckBox::indicator { width: 80px; height: 80px;}")
+        self.mapbox = QPushButton("map")
+        self.mapbox.setStyleSheet("font-size:60pt ; background-color : blue")
+        self.tourbox = QPushButton(" tour")
+        self.tourbox.setStyleSheet("font-size:60pt; background-color : blue")
             
 
         functionoption.addWidget(self.mapbox)
@@ -100,20 +94,9 @@ class Window(QWidget):
         self.wholewindow.addStretch(1)
         self.wholewindow.addLayout(functionoption)
         self.wholewindow.addStretch(1)
-        self.wholewindow .addWidget(self.enter_button)
-        self.wholewindow.addStretch(1)
 
         # Set main layout of the window
         self.setLayout(self.wholewindow)
-
-    def enter1(self):
-        self.func1 = self.func2 = False
-        if self.mapbox.isChecked():
-            self.func1 = True
-        if self.tourbox.isChecked():
-            self.func2 = True
-        # print("Mapbox checked: ", self.func1)
-        # print("Tourbox checked:", self.func2)
 
     def closeEvent(self, event):
         """

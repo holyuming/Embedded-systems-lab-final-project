@@ -1,4 +1,5 @@
 import sys
+import threading
 
 from initialwin import Window
 from tourwin import tourwin
@@ -11,7 +12,7 @@ from PyQt5.QtWidgets import QApplication, QMessageBox, QWidget
 
 
 
-class Manager():
+class Manager(threading.Thread):
     def __init__(self) -> None:
         self.initwin = Window()
         self.tourw = tourwin()
@@ -22,11 +23,11 @@ class Manager():
         self.initwin.tourbox.setChecked(True)
 
         # Unchecked the other checkbox under some conditions
-        self.initwin.mapbox.stateChanged.connect(self.unchecktour)
-        self.initwin.tourbox.stateChanged.connect(self.uncheckmap)
+        self.initwin.mapbox.clicked.connect(self.maphit)
+        self.initwin.tourbox.clicked.connect(self.tourhit)
 
         # If the enter button of initwindow being hit
-        self.initwin.enter_button.clicked.connect(self.initenterhit)
+        # self.initwin.enter_button.clicked.connect(self.initenterhit)
 
         # If the back button of tourwindow being hit
         self.tourw.back_button.clicked.connect(self.tourwbackhit)
@@ -36,26 +37,19 @@ class Manager():
 
         # If the back button of mapwindow being hit
         self.mapw.back_button.clicked.connect(self.mapwbackhit)
+    
+    # def run (self):
+    #     pass
 
-    def unchecktour(self, state): 
-        if state == Qt.Checked:
-            self.initwin.tourbox.setChecked(False)
-        else:
-            self.initwin.tourbox.setChecked(True)
-
-    def uncheckmap(self, state):
-        if state == Qt.Checked:
-            self.initwin.mapbox.setChecked(False)
-        else:
-            self.initwin.mapbox.setChecked(True)
                
-    def initenterhit(self):
-        if (self.initwin.tourbox.isChecked()):
-            self.tourw.show()
-            self.initwin.hide()
-        else:
-            self.mapw.show()
-            self.initwin.hide()
+    def maphit(self):
+        self.tourw.hide()
+        self.mapw.show()
+
+    def tourhit(self):
+        self.tourw.hide()
+        self.tourw.show()
+        
 
     def tourwbackhit(self):
         self.tourw.hide()

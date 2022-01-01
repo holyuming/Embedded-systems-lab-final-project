@@ -38,7 +38,7 @@ class dormwin(QWidget):
         """
         Initialize the window and display its contents to the screen
         """
-        self.setGeometry(250, 50, 800, 620)
+        self.setGeometry(560, 250, 800, 620)
         self.setWindowTitle(self.dormname)
         self.setWindowIcon(QIcon("image/nctu.jpeg"))
         self.setStyleSheet(stylesheet)                                      # <========
@@ -68,17 +68,17 @@ class dormwin(QWidget):
 
         # Previous button 
         self.previous = QPushButton("<<", self)
-        self.previous.setFixedSize(50, 30)
+        self.previous.setFixedSize(170, 80)
         # self.previous.move(20, 300)
-        self.previous.setStyleSheet("background-color : gray ; font-size : 30pt ; font : bold")
+        self.previous.setStyleSheet("background-color : gray ; font-size : 50pt ; font : bold")
         self.previous.clicked.connect(self.previouspic)
 
 
         # Next button
         self.next = QPushButton(">>", self)
-        self.next.setFixedSize(50, 30)
+        self.next.setFixedSize(170, 80)
         # self.next.move(700, 300)
-        self.next.setStyleSheet("background-color : gray ; font-size : 30pt ; font : bold")
+        self.next.setStyleSheet("background-color : gray ; font-size : 50pt ; font : bold")
         self.next.clicked.connect(self.nextpic)
 
 

@@ -20,7 +20,7 @@ class tourwin(QWidget):
 
         # Dorm location  [width, height]                                              needs to be done, tedious work
         self.dorm = {
-            "dorm7"   : [550, 370],
+            "dorm7"   : [550, 340],
             "dorm8"   : [],
             "dorm9"   : [],
             "dorm10"  : [],
@@ -35,7 +35,7 @@ class tourwin(QWidget):
         """
         Initialize the window and display its contents to the screen
         """
-        self.setGeometry(500, 250, 800, 620)
+        self.setGeometry(560, 250, 800, 620)
         self.setFixedSize(800, 620)
         self.setWindowTitle('NCTU MAP')
         self.setWindowIcon(QIcon("image/nctu.jpeg"))
@@ -71,32 +71,9 @@ class tourwin(QWidget):
         # Dorm 7
         self.dorm7 = QPushButton("七舍", self)
         self.dorm7.move(self.dorm["dorm7"][0], self.dorm["dorm7"][1])
-        self.dorm7.setStyleSheet("background-color : yellow")
-
-    # def test(self):
-    #     print("back")
-    #     self.map.hide()
-    
-
-    def closeEvent(self, event):
-        """
-        Display a QMessageBox when asking the user if they want to
-        quit the program.
-        """
-        # set up message box
-        answer = QMessageBox.question(self, "Quit Application?",
-                                      "Are you sure you want to Quit?", QMessageBox.No | QMessageBox.Yes,
-                                      QMessageBox.Yes)
-        if answer == QMessageBox.Yes:
-            event.accept()  # accept the event and close the application
-        else:
-            event.ignore()  # ignore the close event
-        
+        self.dorm7.setStyleSheet("background-color : yellow ; font-size : 35pt")
 
         
-
-
-
         
         
 
