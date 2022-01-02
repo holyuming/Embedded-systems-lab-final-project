@@ -2,6 +2,7 @@ import sys
 import threading
 
 from initialwin import Window
+from mapwindow import mapwindow
 from tourwin import tourwin
 from mapwin import mapwin
 from dormwin import dormwin
@@ -17,20 +18,25 @@ class Manager(threading.Thread):
         self.initwin = Window()
         self.tourw = tourwin()
         self.mapw = mapwin()
+        self.mapwindow = mapwindow("", "")
         self.initwin.show()
 
         # Set the default of tourbox to true
         self.initwin.tourbox.setChecked(True)
 
-        # Unchecked the other checkbox under some conditions
+        # two functions
         self.initwin.mapbox.clicked.connect(self.maphit)
         self.initwin.tourbox.clicked.connect(self.tourhit)
 
-        # If the enter button of initwindow being hit
-        # self.initwin.enter_button.clicked.connect(self.initenterhit)
 
         # If the back button of tourwindow being hit
         self.tourw.back_button.clicked.connect(self.tourwbackhit)
+
+        # If the enter button of mapw being hit
+        self.mapw.enterbutton.clicked.connect(self.mapwenterhit)
+
+        # If the back button of mapwindow being hit
+        # self.mapwindow.backbutton.clicked.connect(self.mapwindowbackhit)
 
         # Dorm pic button being hit
         self.tourw.dorm7.clicked.connect(self.opendorm7)
@@ -38,13 +44,22 @@ class Manager(threading.Thread):
         # If the back button of mapwindow being hit
         self.mapw.back_button.clicked.connect(self.mapwbackhit)
     
-    # def run (self):
-    #     pass
-
                
     def maphit(self):
         self.tourw.hide()
         self.mapw.show()
+
+    def mapwbackhit(self):
+        self.mapw.hide()
+        self.initwin.show()
+
+    def mapwenterhit(self):
+        org = self.mapw.org.currentText()
+        dst = self.mapw.dst.currentText()
+        # print(org, dst)
+        self.mapwindow = mapwindow(org, dst)
+        self.mapwindow.show()
+        
 
     def tourhit(self):
         self.tourw.hide()
@@ -54,14 +69,10 @@ class Manager(threading.Thread):
     def tourwbackhit(self):
         self.tourw.hide()
         self.initwin.show()
-
-    def mapwbackhit(self):
-        self.mapw.hide()
-        self.initwin.show()
     
     def opendorm7(self):
-        self.dorm7 = dormwin("dorm7")
-        self.dorm7.show()
+        self.dorm = dormwin("dorm7")
+        self.dorm.show()
 
 
 
