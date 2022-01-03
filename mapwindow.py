@@ -38,10 +38,10 @@ class mapwindow(QMainWindow):
 
 
 if __name__ == "__main__":
-    org = "northdoor"
-    dst = "dorm8"
+    org = "southdoor"
+    dst = "dorm13"
 
-    # htmlformap(org, dst)
+    htmlformap(org, dst)
     app = QApplication(sys.argv)
     window = mapwindow(org, dst)
     window.show()

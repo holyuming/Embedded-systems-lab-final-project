@@ -21,7 +21,7 @@ def htmlformap(org, dst):
     distance_txt = "<h4> <b>Distance :&nbsp" + "<strong>"+str(round(res['routes'][0]['summary']['distance']/1000,1))+" Km </strong>" +"</h4></b>"
     duration_txt = "<h4> <b>Duration :&nbsp" + "<strong>"+str(round(res['routes'][0]['summary']['duration']/60,1))+" Mins. </strong>" +"</h4></b>"
 
-    m = folium.Map(location=[24.78666, 120.99694],zoom_start=16, control_scale=True,tiles="cartodbpositron")
+    m = folium.Map(location=[24.78666, 120.99694],zoom_start=16, control_scale=True) # tiles="cartodbpositron"
     folium.GeoJson(decoded).add_child(folium.Popup(distance_txt+duration_txt,max_width=300)).add_to(m)
 
     folium.Marker(
