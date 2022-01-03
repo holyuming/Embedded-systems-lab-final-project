@@ -2,6 +2,7 @@ import os
 import sys
 
 from PyQt5.QtCore import QUrl
+from PyQt5.QtGui import QFont, QIcon, QPixmap
 from PyQt5.QtWidgets import QApplication, QHBoxLayout, QMainWindow, QPushButton, QWidget
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 
@@ -13,6 +14,7 @@ class mapwindow(QMainWindow):
     def __init__(self, org:str, dst:str):
 
         super(mapwindow, self).__init__()
+        self.setWindowIcon(QIcon("image/nctu.jpeg"))
         self.setGeometry(560, 230, 800, 620)
         self.setWindowTitle("Routing Result")
 
@@ -38,10 +40,10 @@ class mapwindow(QMainWindow):
 
 
 if __name__ == "__main__":
-    org = "southdoor"
-    dst = "dorm13"
+    org = "northdoor"
+    dst = "dorm3"
 
-    htmlformap(org, dst)
+    # htmlformap(org, dst)
     app = QApplication(sys.argv)
     window = mapwindow(org, dst)
     window.show()

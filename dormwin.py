@@ -38,10 +38,11 @@ class dormwin(QWidget):
         """
         Initialize the window and display its contents to the screen
         """
+        self.setStyleSheet("background-color : gray")
         self.setGeometry(560, 250, 800, 620)
         self.setWindowTitle(self.dormname)
         self.setWindowIcon(QIcon("image/nctu.jpeg"))
-        self.setStyleSheet(stylesheet)                                      # <========
+        # self.setStyleSheet(stylesheet)                                      # <========
         self.setupUI()
 
 
@@ -55,14 +56,9 @@ class dormwin(QWidget):
         self.picnumber = len(os.listdir("image/" + self.dormname ))
         self.picdir = "image/" + self.dormname 
         self.picpath = self.picdir + "/" + str(self.index) + ".jpg"
+
         self.dormimg = QLabel(self)
-        try:
-            with open(self.picpath):
-                pixmap = QPixmap(self.picpath)
-                self.dormimg.setPixmap(pixmap)
-                self.dormimg.resize(800, 620)
-        except FileNotFoundError:
-            print("Image not found.", self.picpath)
+        self.openpic()
 
 
 
@@ -111,8 +107,10 @@ class dormwin(QWidget):
         try:
             with open(self.picpath):
                 pixmap = QPixmap(self.picpath)
+                pixmap = pixmap.scaled(600, 600, Qt.KeepAspectRatio)
+                print(pixmap.size())
                 self.dormimg.setPixmap(pixmap)
-                self.dormimg.resize(800, 620)
+                # self.dormimg.resize(800, 620)
         except FileNotFoundError:
             print("Image not found.", self.picpath)
 
@@ -125,6 +123,6 @@ class dormwin(QWidget):
 
 if __name__ == "__main__":
     app = QApplication(sys.argv)
-    window = dormwin("dorm7")
+    window = dormwin("dorm3")
     window.show()
     sys.exit(app.exec_())
