@@ -6,7 +6,6 @@ from PyQt5.QtGui import QFont, QIcon, QPixmap
 from PyQt5.QtWidgets import QApplication, QHBoxLayout, QMainWindow, QPushButton, QWidget
 from PyQt5.QtWebEngineWidgets import QWebEngineView
 
-from htmlformap import htmlformap
 
 class mapwindow(QMainWindow):
     """docstring for MainWindow"""

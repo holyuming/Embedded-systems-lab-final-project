@@ -20,18 +20,6 @@ class dormwin(QWidget):
         super().__init__()
 
         self.dormname = dormname
-
-        # Dorm location  [width, height]                                              needs to be done, tedious work
-        self.dorm = {
-            "dorm7"   : [550, 370],
-            "dorm8"   : [],
-            "dorm9"   : [],
-            "dorm10"  : [],
-            "dorm11"  : [],
-            "dorm12"  : [],
-            "dorm3"   : [],
-            "dormg2"  : [],
-        }
         self.initializeUI()
 
     def initializeUI(self):

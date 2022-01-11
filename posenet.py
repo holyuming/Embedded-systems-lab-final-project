@@ -1,39 +1,13 @@
-#!/usr/bin/python3
-#
-# Copyright (c) 2021, NVIDIA CORPORATION. All rights reserved.
-#
-# Permission is hereby granted, free of charge, to any person obtaining a
-# copy of this software and associated documentation files (the "Software"),
-# to deal in the Software without restriction, including without limitation
-# the rights to use, copy, modify, merge, publish, distribute, sublicense,
-# and/or sell copies of the Software, and to permit persons to whom the
-# Software is furnished to do so, subject to the following conditions:
-#
-# The above copyright notice and this permission notice shall be included in
-# all copies or substantial portions of the Software.
-#
-# THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-# IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-# FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.  IN NO EVENT SHALL
-# THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-# LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING
-# FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-# DEALINGS IN THE SOFTWARE.
-#
 import pyautogui
-import threading
-
-import Xlib
+import argparse
+import sys
 import jetson.inference
 import jetson.utils
 
-import argparse
-import sys
 
 import time
 import statistics
 
-# parse the command line
 parser = argparse.ArgumentParser(description="Run pose estimation DNN on a video/image stream.", 
                                  formatter_class=argparse.RawTextHelpFormatter, epilog=jetson.inference.poseNet.Usage() +
                                  jetson.utils.videoSource.Usage() + jetson.utils.videoOutput.Usage() + jetson.utils.logUsage())
@@ -46,11 +20,15 @@ parser.add_argument("--threshold", type=float, default=0.15, help="minimum detec
 
 
 
+
+
 try:
     opt = parser.parse_known_args()[0]
+    print(opt.network, opt.input_URI)
+   
 except:
-    print("")
-    parser.print_help()
+    # print("")
+    # parser.print_help()
     sys.exit(0)
 
 # load the pose estimation model
@@ -85,6 +63,10 @@ while True:
     y = 0
 
     for pose in poses:
+        # idx = 12
+        # mid = pose.Keypointw[idx]
+        # print(mid)
+        #break
         x=0
         y=0
         count = 0
@@ -95,11 +77,25 @@ while True:
             y_list.pop(0)
         
 
+        xmin = 0
+        ymin = 0
 
         for key in pose.Keypoints:
+            if ymin < key.y:
+                xmin = key.x
+                #if ymin > key.y:
+                ymin = key.y
             x += key.x
             y += key.y
             count += 1
+            # if count == 8:
+            #    x += key.x
+            #    y += key.y
+
+
+        x -= xmin
+        y -= ymin
+        count -= 1
 
         x = x/count
         y = y/count
@@ -127,7 +123,6 @@ while True:
     #         continue
     #     wrist = pose.Keypoints[wrist_idx]
     #     middle_finger = pose.Keypoints[middle_finger_idx]
-
     #     point_x = (wrist.x + middle_finger.y)/2
     #     point_y = (wrist.y + middle_finger.y)/2
 
@@ -138,7 +133,7 @@ while True:
         # print(pose.Keypoints)
         # print('Links', pose.Links)
 
-    print(net.GetNetworkFPS())
+    # print(net.GetNetworkFPS())
     # render the image
     output.Render(img)
 

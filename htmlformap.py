@@ -1,4 +1,4 @@
-from config import mykey
+# from config import mykey
 
 import openrouteservice
 from openrouteservice import convert
@@ -11,7 +11,7 @@ from coordinates import coord
 
 def htmlformap(org, dst):
 
-    client = openrouteservice.Client(key=mykey)
+    # client = openrouteservice.Client(key=mykey)
 
     coords = ((coord[org][1], coord[org][0]),(coord[dst][1], coord[dst][0]))
     res = client.directions(coords)

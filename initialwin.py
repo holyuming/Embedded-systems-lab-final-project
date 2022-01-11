@@ -48,7 +48,7 @@ class Window(QWidget):
         """
         Initialize the window and display its contents to the screen
         """
-        self.setGeometry(560, 230, 800, 620)
+        self.setGeometry(300, 150, 800, 620)
         self.setWindowTitle('NCTU FOOD GUIDE SYSTEM')
         self.setWindowIcon(QIcon("image/nctu.jpeg"))
         self.setStyleSheet(stylesheet)                                      # <========
