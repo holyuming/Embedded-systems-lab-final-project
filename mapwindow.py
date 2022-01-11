@@ -31,7 +31,7 @@ class mapwindow(QMainWindow):
         url = QUrl.fromLocalFile(filename)
         self.browser.setUrl(url)
 
-        layout.addWidget(self.backbutton)
+        # layout.addWidget(self.backbutton)
         layout.addWidget(self.browser)
         main_frame.setLayout(layout)
 

@@ -56,6 +56,7 @@ class mapwin(QWidget):
         # enter button
         self.enterbutton = QPushButton("ENTER")
         self.enterbutton.setStyleSheet("font-size : 50pt")
+        self.enterbutton.setStyleSheet("background-color : gray ; font-size : 40pt")
         
 
         layout.addWidget(self.back_button)
